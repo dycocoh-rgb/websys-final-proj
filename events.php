@@ -5,7 +5,20 @@ requireAdmin();
 $page_title = "Events";
 $success = ''; $error = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Handle delete
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    $delete_id = $conn->real_escape_string($_POST['delete_id']);
+    $has_appts = $conn->query("SELECT COUNT(*) c FROM appointment WHERE event_id='$delete_id'")->fetch_assoc()['c'];
+    if ($has_appts > 0) {
+        $error = "Cannot delete this event — it has $has_appts existing appointment(s) linked to it.";
+    } else {
+        $conn->query("DELETE FROM event WHERE event_id='$delete_id'");
+        $success = "Event deleted successfully.";
+    }
+}
+
+// Handle create
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_name'])) {
     $name     = $conn->real_escape_string(trim($_POST['event_name']));
     $date     = $conn->real_escape_string($_POST['event_date']);
     $location = $conn->real_escape_string(trim($_POST['event_location']));
@@ -24,6 +37,7 @@ require_once '../includes/header.php';
 ?>
 <div class="page-header"><h1>📅 Events</h1><p><?= count($events) ?> blood drive events</p></div>
 <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
+<?php if ($error): ?><div class="alert alert-error"><?= $error ?></div><?php endif; ?>
 <div class="grid-2" style="margin-bottom:24px">
   <div class="card">
     <div class="card-title">Add New Event</div>
@@ -65,7 +79,7 @@ require_once '../includes/header.php';
   <div class="card-title">All Events</div>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>ID</th><th>Event Name</th><th>Date</th><th>Location</th><th>Capacity</th><th>Booked</th><th>Manager</th></tr></thead>
+      <thead><tr><th>ID</th><th>Event Name</th><th>Date</th><th>Location</th><th>Capacity</th><th>Booked</th><th>Manager</th><th>Action</th></tr></thead>
       <tbody>
         <?php foreach ($events as $ev): ?>
         <tr>
@@ -76,10 +90,21 @@ require_once '../includes/header.php';
           <td><?= $ev['capacity'] ?></td>
           <td><?= $ev['appt_count'] ?></td>
           <td><?= htmlspecialchars($ev['admin_name']) ?></td>
+          <td>
+            <form method="POST" style="display:inline"
+              onsubmit="return confirm('Delete event \'<?= htmlspecialchars($ev['event_name'], ENT_QUOTES) ?>\'?\n\nThis cannot be undone.')">
+              <input type="hidden" name="delete_id" value="<?= $ev['event_id'] ?>">
+              <button type="submit"
+                style="background:#fff0f0;border:1px solid #f5c2c2;color:#c0392b;font-size:11px;font-weight:600;
+                       padding:4px 10px;border-radius:6px;cursor:pointer;">
+                Delete
+              </button>
+            </form>
+          </td>
         </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
   </div>
 </div>
-<?php require_once '../includes/footer.php'; ?>
+<?php require_once '../includes/header.php'; ?>

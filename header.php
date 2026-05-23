@@ -90,7 +90,7 @@ $user_initial = strtoupper(substr($display_name, 0, 1));
       <?php endif; ?>
     </nav>
     <div class="sidebar-footer">
-      <a href="/blood-bank/logout.php" class="nav-item">
+      <a href="/blood-bank/logout.php" class="nav-item" onclick="return confirm('Are you sure you want to log out?')">
         <span class="nav-icon">🚪</span><span>Logout</span>
       </a>
     </div>
