@@ -60,7 +60,10 @@ require_once 'includes/header.php';
       <div class="form-group"><label>Middle Name</label><input type="text" name="mname" value="<?= htmlspecialchars($profile['mname']??'') ?>"/></div>
       <div class="form-group"><label>Address</label><input type="text" name="address" value="<?= htmlspecialchars($profile['address']) ?>" required/></div>
       <div class="form-group"><label>Mobile Number</label><input type="text" name="mobile_no" value="<?= htmlspecialchars($profile['mobile_no']) ?>" required/></div>
-      <button type="submit" class="btn btn-primary btn-full">Save Changes</button>
+      <button type="submit" class="btn btn-primary btn-full"
+      onclick="return confirm('Are you sure you want to save these changes to your profile?')">
+      Save Changes
+    </button>
     </form>
   </div>
 </div>
