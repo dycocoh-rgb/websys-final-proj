@@ -5,7 +5,6 @@ requireAdmin();
 $page_title = "Events";
 $success = ''; $error = '';
 
-// Handle delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     $delete_id = $conn->real_escape_string($_POST['delete_id']);
     $has_appts = $conn->query("SELECT COUNT(*) c FROM appointment WHERE event_id='$delete_id'")->fetch_assoc()['c'];
@@ -15,10 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
         $conn->query("DELETE FROM event WHERE event_id='$delete_id'");
         $success = "Event deleted successfully.";
     }
-}
-
-// Handle create
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_name'])) {
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_name'])) {
     $name     = $conn->real_escape_string(trim($_POST['event_name']));
     $date     = $conn->real_escape_string($_POST['event_date']);
     $location = $conn->real_escape_string(trim($_POST['event_location']));
@@ -35,7 +31,7 @@ $events = $conn->query("SELECT e.*, a.username as admin_name, (SELECT COUNT(*) F
 $admins = $conn->query("SELECT * FROM admin")->fetch_all(MYSQLI_ASSOC);
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>📅 Events</h1><p><?= count($events) ?> blood drive events</p></div>
+<div class="page-header"><h1><i class="bi bi-calendar-event-fill"></i> Events</h1><p><?= count($events) ?> blood drive events</p></div>
 <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
 <?php if ($error): ?><div class="alert alert-error"><?= $error ?></div><?php endif; ?>
 <div class="grid-2" style="margin-bottom:24px">
@@ -66,8 +62,8 @@ require_once '../includes/header.php';
           <span style="font-size:11px;color:#aaa"><?= $ev['event_date'] ?></span>
         </div>
         <h3><?= htmlspecialchars($ev['event_name']) ?></h3>
-        <div class="event-meta">📍 <?= htmlspecialchars($ev['event_location']) ?></div>
-        <div class="event-meta">👤 <?= htmlspecialchars($ev['admin_name']) ?></div>
+        <div class="event-meta"><i class="bi bi-geo-alt-fill"></i> <?= htmlspecialchars($ev['event_location']) ?></div>
+        <div class="event-meta"><i class="bi bi-person-fill"></i> <?= htmlspecialchars($ev['admin_name']) ?></div>
         <div style="font-size:12px;color:#888;margin-top:8px"><?= $ev['appt_count'] ?>/<?= $ev['capacity'] ?> slots</div>
         <div class="progress-bar"><div class="progress-fill" style="width:<?= min($pct,100) ?>%"></div></div>
       </div>
@@ -91,13 +87,12 @@ require_once '../includes/header.php';
           <td><?= $ev['appt_count'] ?></td>
           <td><?= htmlspecialchars($ev['admin_name']) ?></td>
           <td>
+            <?php $ev_name = htmlspecialchars($ev['event_name'], ENT_QUOTES); ?>
             <form method="POST" style="display:inline"
-              onsubmit="return confirm('Delete event \'<?= htmlspecialchars($ev['event_name'], ENT_QUOTES) ?>\'?\n\nThis cannot be undone.')">
+              onsubmit="return confirm('Delete event <?= $ev_name ?>? This cannot be undone.')">
               <input type="hidden" name="delete_id" value="<?= $ev['event_id'] ?>">
-              <button type="submit"
-                style="background:#fff0f0;border:1px solid #f5c2c2;color:#c0392b;font-size:11px;font-weight:600;
-                       padding:4px 10px;border-radius:6px;cursor:pointer;">
-                Delete
+              <button type="submit" style="background:#fff0f0;border:1px solid #f5c2c2;color:#c0392b;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;">
+                <i class="bi bi-trash-fill"></i> Delete
               </button>
             </form>
           </td>
@@ -107,4 +102,4 @@ require_once '../includes/header.php';
     </table>
   </div>
 </div>
-<?php require_once '../includes/header.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

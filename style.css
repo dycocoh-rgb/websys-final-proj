@@ -188,3 +188,13 @@ tbody tr:last-child td { border-bottom: none; }
 .flex { display: flex; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; }
+
+/* Bootstrap Icons sizing */
+.nav-item .bi { font-size: 16px; width: 20px; text-align: center; }
+.empty-icon .bi { font-size: 48px; color: #ccc; }
+.stat-icon .bi { font-size: 22px; }
+.logo-icon .bi { font-size: 24px; color: #fff; }
+.icon .bi { font-size: 24px; color: #fff; }
+.page-header h1 .bi { font-size: inherit; margin-right: 6px; }
+.card-title .bi { font-size: inherit; margin-right: 4px; }
+.bi { vertical-align: -0.125em; }

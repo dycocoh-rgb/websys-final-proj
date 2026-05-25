@@ -4,31 +4,23 @@ require_once '../includes/db.php';
 requireAdmin();
 $page_title = "Blood Requests";
 $success = '';
-$error = '';
 $bt_colors = ['O+'=>'#e53935','A+'=>'#1e88e5','B+'=>'#43a047','AB+'=>'#8e24aa','O-'=>'#b71c1c','A-'=>'#1565c0','B-'=>'#2e7d32','AB-'=>'#6a1b9a'];
 
 // Update status
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['request_id'])) {
     $rid    = $conn->real_escape_string($_POST['request_id']);
     $status = $conn->real_escape_string($_POST['req_status']);
+    $conn->query("UPDATE blood_request SET req_status='$status' WHERE request_id='$rid'");
 
-    if ($status === 'completed') {
-        $buid = trim($conn->real_escape_string($_POST['blood_unit_id'] ?? ''));
-        if ($buid !== '') {
-            $conn->query("UPDATE blood_request SET req_status='completed' WHERE request_id='$rid'");
-            $re_res = $conn->query("SELECT release_id FROM blood_release ORDER BY release_id DESC LIMIT 1")->fetch_assoc();
-            $last_re = $re_res ? intval(substr($re_res['release_id'], 2)) : 0;
-            $re_id = 'RE' . str_pad($last_re + 1, 2, '0', STR_PAD_LEFT);
-            $conn->query("INSERT INTO blood_release (release_id, request_id, blood_unit_id, units_released, release_date) VALUES ('$re_id', '$rid', '$buid', 1, CURDATE())");
-            $conn->query("UPDATE blood_unit SET unit_status='released' WHERE blood_unit_id='$buid'");
-            $success = "Request completed and blood unit assigned.";
-        } else {
-            $error = "Cannot complete request without assigning a valid blood unit.";
-        }
-    } else {
-        $conn->query("UPDATE blood_request SET req_status='$status' WHERE request_id='$rid'");
-        $success = "Request updated successfully.";
+    if ($status === 'completed' && isset($_POST['blood_unit_id'])) {
+        $buid = $conn->real_escape_string($_POST['blood_unit_id']);
+        $re_res = $conn->query("SELECT release_id FROM blood_release ORDER BY release_id DESC LIMIT 1")->fetch_assoc();
+        $last_re = $re_res ? intval(substr($re_res['release_id'], 2)) : 0;
+        $re_id = 'RE' . str_pad($last_re + 1, 2, '0', STR_PAD_LEFT);
+        $conn->query("INSERT INTO blood_release (release_id, request_id, blood_unit_id, units_released, release_date) VALUES ('$re_id', '$rid', '$buid', 1, CURDATE())");
+        $conn->query("UPDATE blood_unit SET unit_status='released' WHERE blood_unit_id='$buid'");
     }
+    $success = "Request updated successfully.";
 }
 
 $requests = $conn->query("SELECT br.*, p.fname, p.lname FROM blood_request br
@@ -39,9 +31,8 @@ $requests = $conn->query("SELECT br.*, p.fname, p.lname FROM blood_request br
 $stored_units = $conn->query("SELECT bu.*, d.blood_type FROM blood_unit bu JOIN appointment a ON bu.appointment_id=a.appointment_id JOIN donor d ON a.donor_id=d.donor_id WHERE bu.unit_status='stored'")->fetch_all(MYSQLI_ASSOC);
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>📬 Blood Requests</h1><p>Manage and fulfill blood requests</p></div>
+<div class="page-header"><h1><i class="bi bi-envelope-fill"></i> Blood Requests</h1><p>Manage and fulfill blood requests</p></div>
 <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
-<?php if ($error): ?><div class="alert alert-danger"><?= $error ?></div><?php endif; ?>
 <div class="card">
   <div class="table-wrap">
     <table>

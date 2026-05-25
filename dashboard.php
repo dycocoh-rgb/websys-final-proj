@@ -22,7 +22,7 @@ $pending_req = $recipient ? $conn->query("SELECT COUNT(*) c FROM blood_request W
 require_once 'includes/header.php';
 ?>
 <div class="page-header">
-  <h1>Welcome back, <?= htmlspecialchars($profile['fname'] ?? 'User') ?>! 👋</h1>
+  <h1>Welcome back, <?= htmlspecialchars($profile['fname'] ?? 'User') ?>! <i class="bi bi-emoji-laughing"></i></h1>
   <p>Here's your BloodBank overview</p>
 </div>
 
@@ -38,14 +38,14 @@ require_once 'includes/header.php';
 <div class="stats-grid">
   <?php if ($donor): ?>
   <div class="stat-card" style="border-left:4px solid var(--red)">
-    <div class="stat-icon" style="background:#fce4ec">🩸</div>
+    <div class="stat-icon" style="background:#fce4ec"><i class="bi bi-droplet-fill"></i></div>
     <div>
       <div class="stat-value"><?= $donor['no_times_donated'] ?></div>
       <div class="stat-label">Times Donated</div>
     </div>
   </div>
   <div class="stat-card" style="border-left:4px solid var(--purple)">
-    <div class="stat-icon" style="background:#f3e5f5">📋</div>
+    <div class="stat-icon" style="background:#f3e5f5"><i class="bi bi-clipboard2-pulse-fill"></i></div>
     <div>
       <div class="stat-value"><?= $appt_count ?></div>
       <div class="stat-label">Appointments</div>
@@ -54,14 +54,14 @@ require_once 'includes/header.php';
   <?php endif; ?>
   <?php if ($recipient): ?>
   <div class="stat-card" style="border-left:4px solid var(--blue)">
-    <div class="stat-icon" style="background:#e3f2fd">📬</div>
+    <div class="stat-icon" style="background:#e3f2fd"><i class="bi bi-envelope-fill"></i></div>
     <div>
       <div class="stat-value"><?= $req_count ?></div>
       <div class="stat-label">Blood Requests</div>
     </div>
   </div>
   <div class="stat-card" style="border-left:4px solid var(--orange)">
-    <div class="stat-icon" style="background:#fff3e0">⏳</div>
+    <div class="stat-icon" style="background:#fff3e0"><i class="bi bi-clock-history"></i></div>
     <div>
       <div class="stat-value"><?= $pending_req ?></div>
       <div class="stat-label">Pending Requests</div>
@@ -73,7 +73,7 @@ require_once 'includes/header.php';
 <div class="grid-2">
   <!-- Profile Summary -->
   <div class="card">
-    <div class="card-title">👤 My Profile</div>
+    <div class="card-title"><i class="bi bi-person-fill"></i> My Profile</div>
     <?php if ($profile): ?>
     <div class="profile-header">
       <div class="profile-avatar"><?= strtoupper(substr($profile['fname'],0,1)) ?></div>
@@ -90,23 +90,23 @@ require_once 'includes/header.php';
     </div>
     <a href="profile.php" class="btn btn-secondary btn-sm" style="margin-top:16px">Edit Profile</a>
     <?php else: ?>
-    <div class="empty"><div class="empty-icon">👤</div><p>No profile found.</p></div>
+    <div class="empty"><div class="empty-icon"><i class="bi bi-person-fill"></i></div><p>No profile found.</p></div>
     <?php endif; ?>
   </div>
 
   <!-- Role Info -->
   <div class="card">
-    <div class="card-title">🏷️ My Roles</div>
+    <div class="card-title"><i class="bi bi-person-badge"></i> My Roles</div>
     <?php if ($donor): ?>
     <div style="background:#fff5f5;border-radius:12px;padding:16px;margin-bottom:12px;border-left:4px solid var(--red)">
-      <div style="font-weight:800;color:var(--red);margin-bottom:6px">🩸 Donor</div>
+      <div style="font-weight:800;color:var(--red);margin-bottom:6px"><i class="bi bi-droplet-fill"></i> Donor</div>
       <div style="font-size:13px;color:#555">Blood Type: <span style="font-weight:700;background:<?= ['O+'=>'#e53935','A+'=>'#1e88e5','B+'=>'#43a047','AB+'=>'#8e24aa','O-'=>'#b71c1c','A-'=>'#1565c0','B-'=>'#2e7d32','AB-'=>'#6a1b9a'][$donor['blood_type']]??'#555' ?>;color:#fff;padding:2px 10px;border-radius:20px;font-size:12px"><?= $donor['blood_type'] ?></span></div>
       <div style="font-size:13px;color:#555;margin-top:4px">Donations: <strong><?= $donor['no_times_donated'] ?></strong></div>
       <a href="appointments.php" class="btn btn-sm btn-primary" style="margin-top:10px">View Appointments</a>
     </div>
     <?php else: ?>
     <div style="background:#f8f9ff;border-radius:12px;padding:16px;margin-bottom:12px;border:2px dashed #e0e0e8;text-align:center">
-      <div style="font-size:28px;margin-bottom:8px">🩸</div>
+      <div style="font-size:28px;margin-bottom:8px"><i class="bi bi-droplet-fill"></i></div>
       <p style="color:#888;font-size:13px;margin-bottom:10px">Not registered as a donor yet</p>
       <a href="donor-register.php" class="btn btn-sm btn-primary">Register as Donor</a>
     </div>
@@ -114,13 +114,13 @@ require_once 'includes/header.php';
 
     <?php if ($recipient): ?>
     <div style="background:#f0f7ff;border-radius:12px;padding:16px;border-left:4px solid var(--blue)">
-      <div style="font-weight:800;color:var(--blue);margin-bottom:6px">🏥 Recipient</div>
+      <div style="font-weight:800;color:var(--blue);margin-bottom:6px"><i class="bi bi-hospital-fill"></i> Recipient</div>
       <div style="font-size:13px;color:#555">Last Request: <strong><?= $recipient['last_request_date'] ?? 'None' ?></strong></div>
       <a href="my-requests.php" class="btn btn-sm btn-blue" style="margin-top:10px">View Requests</a>
     </div>
     <?php else: ?>
     <div style="background:#f8f9ff;border-radius:12px;padding:16px;border:2px dashed #e0e0e8;text-align:center">
-      <div style="font-size:28px;margin-bottom:8px">🏥</div>
+      <div style="font-size:28px;margin-bottom:8px"><i class="bi bi-hospital-fill"></i></div>
       <p style="color:#888;font-size:13px;margin-bottom:10px">Not registered as a recipient yet</p>
       <a href="recipient-register.php" class="btn btn-sm btn-blue">Register as Recipient</a>
     </div>
@@ -131,7 +131,7 @@ require_once 'includes/header.php';
 <!-- Upcoming Events -->
 <div class="card" style="margin-top:20px">
   <div class="card-header">
-    <h3>📅 Upcoming Blood Drive Events</h3>
+    <h3><i class="bi bi-calendar-event-fill"></i> Upcoming Blood Drive Events</h3>
     <a href="appointments.php" class="btn btn-sm btn-primary">Book Appointment</a>
   </div>
   <div class="event-cards">
@@ -147,14 +147,14 @@ require_once 'includes/header.php';
         <span style="font-size:11px;color:#aaa"><?= $ev['event_date'] ?></span>
       </div>
       <h3><?= htmlspecialchars($ev['event_name']) ?></h3>
-      <div class="event-meta">📍 <?= htmlspecialchars($ev['event_location']) ?></div>
-      <div class="event-meta">👤 <?= htmlspecialchars($ev['admin_name']) ?></div>
+      <div class="event-meta"><i class="bi bi-geo-alt-fill"></i> <?= htmlspecialchars($ev['event_location']) ?></div>
+      <div class="event-meta"><i class="bi bi-person-fill"></i> <?= htmlspecialchars($ev['admin_name']) ?></div>
       <div style="font-size:12px;color:#888;margin-top:8px"><?= $appt_c ?>/<?= $ev['capacity'] ?> slots filled</div>
       <div class="progress-bar"><div class="progress-fill" style="width:<?= min($pct,100) ?>%"></div></div>
     </div>
     <?php endforeach; ?>
     <?php if (empty($events)): ?>
-    <div class="empty" style="grid-column:1/-1"><div class="empty-icon">📅</div><p>No upcoming events</p></div>
+    <div class="empty" style="grid-column:1/-1"><div class="empty-icon"><i class="bi bi-calendar-event-fill"></i></div><p>No upcoming events</p></div>
     <?php endif; ?>
   </div>
 </div>

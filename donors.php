@@ -10,9 +10,9 @@ $donors = $conn->query("SELECT d.*, p.fname, p.lname, p.mobile_no, ur.is_active 
     ORDER BY d.donor_id")->fetch_all(MYSQLI_ASSOC);
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>🩸 Donors</h1><p><?= count($donors) ?> registered donors</p></div>
+<div class="page-header"><h1><i class="bi bi-droplet-fill"></i> Donors</h1><p><?= count($donors) ?> registered donors</p></div>
 <div class="filter-bar">
-  <div class="search-box"><span class="search-icon">🔍</span><input id="tableSearch" type="text" placeholder="Search donors..."/></div>
+  <div class="search-box"><span class="search-icon"><i class="bi bi-search"></i></span><input id="tableSearch" type="text" placeholder="Search donors..."/></div>
 </div>
 <div class="card">
   <div class="table-wrap">

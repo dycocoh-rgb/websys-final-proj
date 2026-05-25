@@ -40,13 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$already_donor) {
 require_once 'includes/header.php';
 ?>
 <div class="page-header">
-  <h1>🩸 Become a Donor</h1>
+  <h1><i class="bi bi-droplet-fill" style="color:var(--red)"></i> Become a Donor</h1>
   <p>Register to help save lives by donating blood</p>
 </div>
 <?php if ($already_donor): ?>
 <div class="card" style="max-width:500px">
   <div style="text-align:center;padding:20px">
-    <div style="font-size:56px;margin-bottom:12px">✅</div>
+    <div style="font-size:56px;margin-bottom:12px;"><i class="bi bi-check-square-fill" style="color:var(--green)"></i></div>
     <h2 style="margin-bottom:8px">You're a Registered Donor!</h2>
     <p style="color:#888;margin-bottom:20px">Thank you for being a life-saver.</p>
     <div style="background:#fff5f5;border-radius:12px;padding:16px;margin-bottom:20px">

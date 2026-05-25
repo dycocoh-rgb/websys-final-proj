@@ -11,9 +11,9 @@ $recipients = $conn->query("SELECT rc.*, p.fname, p.lname, p.mobile_no,
     ORDER BY rc.recipient_id")->fetch_all(MYSQLI_ASSOC);
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>🏥 Recipients</h1><p><?= count($recipients) ?> registered recipients</p></div>
+<div class="page-header"><h1><i class="bi bi-hospital-fill"></i> Recipients</h1><p><?= count($recipients) ?> registered recipients</p></div>
 <div class="filter-bar">
-  <div class="search-box"><span class="search-icon">🔍</span><input id="tableSearch" type="text" placeholder="Search recipients..."/></div>
+  <div class="search-box"><span class="search-icon"><i class="bi bi-search"></i></span><input id="tableSearch" type="text" placeholder="Search recipients..."/></div>
 </div>
 <div class="card">
   <div class="table-wrap">

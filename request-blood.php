@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $recipient) {
 require_once 'includes/header.php';
 ?>
 <div class="page-header">
-  <h1>📬 Request Blood</h1>
+  <h1><i class="bi bi-envelope-fill"></i> Request Blood</h1>
   <p>Submit a blood request and we'll process it as soon as possible</p>
 </div>
 <?php if (!$recipient): ?>

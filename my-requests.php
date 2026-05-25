@@ -14,7 +14,7 @@ $bt_colors = ['O+'=>'#e53935','A+'=>'#1e88e5','B+'=>'#43a047','AB+'=>'#8e24aa','
 require_once 'includes/header.php';
 ?>
 <div class="page-header">
-  <h1>📄 My Blood Requests</h1>
+  <h1><i class="bi bi-file-earmark-text-fill"></i> My Blood Requests</h1>
   <p>Track all your blood requests</p>
 </div>
 <?php if (!$recipient): ?>
@@ -40,7 +40,7 @@ require_once 'includes/header.php';
         </tr>
         <?php endforeach; ?>
         <?php if (empty($requests)): ?>
-        <tr><td colspan="7"><div class="empty"><div class="empty-icon">📄</div><p>No requests yet</p></div></td></tr>
+        <tr><td colspan="7"><div class="empty"><div class="empty-icon"><i class="bi bi-file-earmark-text-fill"></i></div><p>No requests yet</p></div></td></tr>
         <?php endif; ?>
       </tbody>
     </table>

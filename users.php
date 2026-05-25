@@ -9,9 +9,9 @@ $users = $conn->query("SELECT u.*, p.fname, p.lname, p.sex, c.chapter_LOC FROM u
     ORDER BY u.user_id")->fetch_all(MYSQLI_ASSOC);
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>👥 Users</h1><p><?= count($users) ?> registered users</p></div>
+<div class="page-header"><h1><i class="bi bi-people-fill"></i> Users</h1><p><?= count($users) ?> registered users</p></div>
 <div class="filter-bar">
-  <div class="search-box"><span class="search-icon">🔍</span><input id="tableSearch" type="text" placeholder="Search users..."/></div>
+  <div class="search-box"><span class="search-icon"><i class="bi bi-search"></i></span><input id="tableSearch" type="text" placeholder="Search users..."/></div>
 </div>
 <div class="card">
   <div class="table-wrap">
@@ -20,7 +20,7 @@ require_once '../includes/header.php';
       <tbody>
         <?php foreach ($users as $u): ?>
         <tr>
-          <td><strong style="color:#555"><?= $u['user_id'] ?></strong></td>
+          <td><strong style="color:var(--orange)"><?= $u['user_id'] ?></strong></td>
           <td><?= htmlspecialchars("{$u['fname']} {$u['lname']}") ?></td>
           <td style="color:#777;font-size:12px"><?= htmlspecialchars($u['email']) ?></td>
           <td><?= htmlspecialchars($u['chapter_LOC']??'—') ?></td>

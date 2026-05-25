@@ -33,10 +33,10 @@ $appointments = $conn->query("SELECT a.*, e.event_name, d.blood_type, p.fname, p
 $bt_colors = ['O+'=>'#e53935','A+'=>'#1e88e5','B+'=>'#43a047','AB+'=>'#8e24aa','O-'=>'#b71c1c','A-'=>'#1565c0','B-'=>'#2e7d32','AB-'=>'#6a1b9a'];
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>📋 Appointments</h1><p><?= count($appointments) ?> total appointments</p></div>
+<div class="page-header"><h1><i class="bi bi-clipboard2-pulse-fill"></i> Appointments</h1><p><?= count($appointments) ?> total appointments</p></div>
 <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
 <div class="filter-bar">
-  <div class="search-box"><span class="search-icon">🔍</span><input id="tableSearch" type="text" placeholder="Search appointments..."/></div>
+  <div class="search-box"><span class="search-icon"><i class="bi bi-search"></i></span><input id="tableSearch" type="text" placeholder="Search appointments..."/></div>
 </div>
 <div class="card">
   <div class="table-wrap">

@@ -24,21 +24,21 @@ $recent_requests = $conn->query("SELECT br.*, p.fname, p.lname FROM blood_reques
 
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>🏠 Admin Dashboard</h1><p>Blood Bank Management System Overview</p></div>
+<div class="page-header"><h1><i class="bi bi-house-fill"></i> Admin Dashboard</h1><p>Blood Bank Management System Overview</p></div>
 <div class="stats-grid">
-  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec">🩸</div><div><div class="stat-value"><?= $total_donors ?></div><div class="stat-label">Total Donors</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #1e88e5"><div class="stat-icon" style="background:#e3f2fd">🏥</div><div><div class="stat-value"><?= $total_recipients ?></div><div class="stat-label">Total Recipients</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #43a047"><div class="stat-icon" style="background:#e8f5e9">💉</div><div><div class="stat-value"><?= $stored_units ?></div><div class="stat-label">Stored Units</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #fb8c00"><div class="stat-icon" style="background:#fff3e0">📅</div><div><div class="stat-value"><?= $total_events ?></div><div class="stat-label">Events</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #8e24aa"><div class="stat-icon" style="background:#f3e5f5">✅</div><div><div class="stat-value"><?= $completed_appts ?></div><div class="stat-label">Completed Donations</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec">⏳</div><div><div class="stat-value"><?= $pending_requests ?></div><div class="stat-label">Pending Requests</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #1e88e5"><div class="stat-icon" style="background:#e3f2fd">👥</div><div><div class="stat-value"><?= $total_users ?></div><div class="stat-label">Total Users</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #43a047"><div class="stat-icon" style="background:#e8f5e9">📦</div><div><div class="stat-value"><?= $total_releases ?></div><div class="stat-label">Units Released</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec"><i class="bi bi-droplet-fill"></i></div><div><div class="stat-value"><?= $total_donors ?></div><div class="stat-label">Total Donors</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #1e88e5"><div class="stat-icon" style="background:#e3f2fd"><i class="bi bi-hospital-fill"></i></div><div><div class="stat-value"><?= $total_recipients ?></div><div class="stat-label">Total Recipients</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #43a047"><div class="stat-icon" style="background:#e8f5e9"><i class="bi bi-capsule"></i></div><div><div class="stat-value"><?= $stored_units ?></div><div class="stat-label">Stored Units</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #fb8c00"><div class="stat-icon" style="background:#fff3e0"><i class="bi bi-calendar-event-fill"></i></div><div><div class="stat-value"><?= $total_events ?></div><div class="stat-label">Events</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #8e24aa"><div class="stat-icon" style="background:#f3e5f5"><i class="bi bi-check2-circle"></i></div><div><div class="stat-value"><?= $completed_appts ?></div><div class="stat-label">Completed Donations</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec"><i class="bi bi-clock-history"></i></div><div><div class="stat-value"><?= $pending_requests ?></div><div class="stat-label">Pending Requests</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #1e88e5"><div class="stat-icon" style="background:#e3f2fd"><i class="bi bi-people-fill"></i></div><div><div class="stat-value"><?= $total_users ?></div><div class="stat-label">Total Users</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #43a047"><div class="stat-icon" style="background:#e8f5e9"><i class="bi bi-box-seam"></i></div><div><div class="stat-value"><?= $total_releases ?></div><div class="stat-label">Units Released</div></div></div>
 </div>
 
 <div class="grid-2">
   <div class="card">
-    <div class="card-title">🩸 Blood Type Distribution</div>
+    <div class="card-title"><i class="bi bi-droplet-fill"></i> Blood Type Distribution</div>
     <div style="display:flex;flex-wrap:wrap;gap:10px">
       <?php foreach ($bt_rows as $bt): ?>
       <div style="background:<?= $bt_colors[$bt['blood_type']]??'#555' ?>;color:#fff;border-radius:12px;padding:12px 18px;text-align:center;min-width:70px">
@@ -49,7 +49,7 @@ require_once '../includes/header.php';
     </div>
   </div>
   <div class="card">
-    <div class="card-title">📬 Recent Blood Requests</div>
+    <div class="card-title"><i class="bi bi-envelope-fill"></i> Recent Blood Requests</div>
     <table style="width:100%;font-size:13px">
       <thead><tr><th>ID</th><th>Recipient</th><th>Blood Type</th><th>Status</th></tr></thead>
       <tbody>

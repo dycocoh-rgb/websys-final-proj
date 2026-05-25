@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $last_pid = $pid_res ? intval(substr($pid_res['profile_id'], 1)) : 0;
                 $profile_id = 'P' . str_pad($last_pid + 1, 3, '0', STR_PAD_LEFT);
 
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                 $conn->query("INSERT INTO user_account (user_id, user_database, email, password, created_at)
-                    VALUES ('$user_id', '$db', '$email', '$password', CURDATE())");
+                    VALUES ('$user_id', '$db', '$email', '$hashed_password', CURDATE())");
 
                 $conn->query("INSERT INTO profile (profile_id, user_id, fname, lname, mname, birth_date, sex, address, mobile_no)
                     VALUES ('$profile_id', '$user_id', '$fname', '$lname', '$mname', '$birth_date', '$sex', '$address', '$mobile_no')");
@@ -64,7 +65,7 @@ $chapters = $conn->query("SELECT * FROM chapter")->fetch_all(MYSQLI_ASSOC);
 <div class="auth-wrap">
   <div class="auth-card" style="max-width:520px">
     <div class="auth-logo">
-      <div class="icon">🩸</div>
+      <div class="icon"><i class="bi bi-droplet-fill"></i></div>
       <div><h1>BloodBank</h1><p>Create your account</p></div>
     </div>
     <h2>Create Account</h2>

@@ -15,15 +15,15 @@ $released = array_filter($units, fn($u) => $u['unit_status']==='released');
 $reserved = array_filter($units, fn($u) => $u['unit_status']==='reserved');
 require_once '../includes/header.php';
 ?>
-<div class="page-header"><h1>💉 Blood Inventory</h1><p><?= count($units) ?> total blood units</p></div>
+<div class="page-header"><h1><i class="bi bi-capsule"></i> Blood Inventory</h1><p><?= count($units) ?> total blood units</p></div>
 <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
   <div class="stat-card" style="border-left:4px solid #43a047"><div class="stat-icon" style="background:#e8f5e9">🟢</div><div><div class="stat-value"><?= count($stored) ?></div><div class="stat-label">Stored</div></div></div>
   <div class="stat-card" style="border-left:4px solid #1e88e5"><div class="stat-icon" style="background:#e3f2fd">🔵</div><div><div class="stat-value"><?= count($released) ?></div><div class="stat-label">Released</div></div></div>
   <div class="stat-card" style="border-left:4px solid #8e24aa"><div class="stat-icon" style="background:#f3e5f5">🟣</div><div><div class="stat-value"><?= count($reserved) ?></div><div class="stat-label">Reserved</div></div></div>
-  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec">📦</div><div><div class="stat-value"><?= count($units) ?></div><div class="stat-label">Total Units</div></div></div>
+  <div class="stat-card" style="border-left:4px solid #e53935"><div class="stat-icon" style="background:#fce4ec"><i class="bi bi-box-seam"></i></div><div><div class="stat-value"><?= count($units) ?></div><div class="stat-label">Total Units</div></div></div>
 </div>
 <div class="filter-bar">
-  <div class="search-box"><span class="search-icon">🔍</span><input id="tableSearch" type="text" placeholder="Search units..."/></div>
+  <div class="search-box"><span class="search-icon"><i class="bi bi-search"></i></span><input id="tableSearch" type="text" placeholder="Search units..."/></div>
 </div>
 <div class="card">
   <div class="table-wrap">

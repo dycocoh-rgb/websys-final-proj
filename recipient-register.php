@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$already_recipient) {
 require_once 'includes/header.php';
 ?>
 <div class="page-header">
-  <h1>🏥 Become a Recipient</h1>
+  <h1><i class="bi bi-hospital-fill"></i> Become a Recipient</h1>
   <p>Register to request blood when you need it</p>
 </div>
 <?php if ($already_recipient): ?>
 <div class="card" style="max-width:500px">
   <div style="text-align:center;padding:20px">
-    <div style="font-size:56px;margin-bottom:12px">✅</div>
+    <div style="font-size:56px;margin-bottom:12px"><i class="bi bi-check-square-fill" style="color:var(--green)"></i></div>
     <h2 style="margin-bottom:8px">You're a Registered Recipient!</h2>
     <p style="color:#888;margin-bottom:20px">You can now request blood when needed.</p>
     <a href="request-blood.php" class="btn btn-blue">Request Blood Now</a>
